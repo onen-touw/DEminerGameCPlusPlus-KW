@@ -1,8 +1,7 @@
 #pragma once
 #include "imagesClass.h"
 #include "setting.h"
-//using settingGame::Surface;
-//using settingGame::win;
+
 
 
 class FieldGeneration :
@@ -113,53 +112,6 @@ public:
 		}
 	}
 
-
-
-
-
-	//возвращает ячейку i j
-	cell_values getCell(int i, int j) {
-		return field_[i][j];
-	}
-
-	///ф-ция установки флага
-	void setFlag(int i, int j) {
-		if (field_[i][j].flag == 0)
-		{
-			field_[i][j].flag = 1;
-		}
-		else
-		{
-			field_[i][j].flag = 0;
-		}
-		return;
-	}
-
-	///ф-ция установки вопроса
-	void setQuestion(int i, int j) {
-		if (field_[i][j].question == 0)
-		{
-			field_[i][j].question = 1;
-		}
-		else
-		{
-			field_[i][j].question = 0;
-		}
-		return;
-	}
-
-
-	/*///установка бомбы в ячейку i j
-	void setBomb(position pos) {
-		field_[pos.i][pos.j].bomb = true;
-		return;
-	}*/
-
-	///установка значения ОТКРЫТО в ячейку i j
-	void setOpen(position pos) {
-		field_[pos.i][pos.j].open = true;
-		return;
-	}
 
 
 	///===================================

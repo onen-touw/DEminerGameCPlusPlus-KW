@@ -251,7 +251,7 @@ public:
 				this->winHeight
 			};
 			std::string str = "Классическая игра САПЕР\nРазработа студентом БГТУ 'Военмех' Гранитовым А.С. как курсовая работа\n\n"
-				 "GIT: ";
+				 "GIT: https://github.com/onen-touw/DEminerGameCPlusPlus-KW.git ";
 			this->blitTxt(this->font, this->color, str.c_str(), mr);
 			str.clear();
 
