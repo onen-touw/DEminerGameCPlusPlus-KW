@@ -134,7 +134,7 @@ struct menuSettings
 	int cropHeightImgBtn = 150;
 	int heightImgBtn = 95;
 	int widthImgBtns = 300;
-	const int menu2LvlPunctsCount = 2; ///about, settings
+	//const int menu2LvlPunctsCount = 2; ///about, settings
 
 	enum headerImg
 	{
@@ -160,12 +160,12 @@ struct menuSettings
 
 		imgMenuTOTAL
 	};
-	enum menu2lvlPuncts
-	{
-		goTo1lvl,
-		settingsP,
-		aboutP
-	};
+	//enum menu2lvlPuncts
+	//{
+	//	goTo1lvl,
+	//	settingsP,
+	//	aboutP
+	//};
 	enum rootBtn
 	{
 		accept,

@@ -261,17 +261,17 @@ public:
 	
 
 	//поиск ячейки по координатам (+ проверка на нахождение курсора в игровой области)
-	position findCell(position pos) {
+	position findCell(int x, int y) {
 		// параметры ограничения поля прописана от 0
-		if (pos.i >= 0 && pos.i <= (field_.size() * gameSetting::winObjSize.cellSize) && pos.j >= 0
-			&& pos.j <= field_[0].size() * gameSetting::winObjSize.cellSize)
+		if (x >= 0 && x <= (field_.size() * gameSetting::winObjSize.cellSize) && y >= 0
+			&& y <= field_[0].size() * gameSetting::winObjSize.cellSize)
 		{
 			for (int i = 1; i < field_.size() - 1; i++)
 			{
 				for (int j = 1; j < field_[0].size() - 1; j++)
 				{
-					if (pos.i > field_[i][j].x && pos.i < field_[i][j].x + gameSetting::winObjSize.cellSize
-						&& pos.j > field_[i][j].y && pos.j < field_[i][j].y + gameSetting::winObjSize.cellSize)
+					if (x > field_[i][j].x && x < field_[i][j].x + gameSetting::winObjSize.cellSize
+						&& y > field_[i][j].y && y < field_[i][j].y + gameSetting::winObjSize.cellSize)
 					{
 						return { field_[i][j].i, field_[i][j].j };
 					}
