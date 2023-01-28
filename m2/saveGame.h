@@ -109,7 +109,7 @@ public:
 			this->statMatrix[block + hB][1]++; /// +win / +0
 			if (time < this->statMatrix[block + hB][2] || statMatrix[block + hB][2] == 0)
 			{
-				this->statMatrix[block + hB][2] = time; /// time
+				this->statMatrix[block + hB][2] = time;
 
 			}
 		}

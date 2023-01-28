@@ -155,7 +155,7 @@ public:
 				else if (event.button.button == SDL_BUTTON_RIGHT && event.type == SDL_MOUSEBUTTONUP && !this->gResult && !this->menu.getMenuFlag())
 				{
 					SDL_GetMouseState(&cursor_X, &cursor_Y);
-					position pos = fTest.findCell({ (short)this->cursor_X, (short)this->cursor_Y });
+					position pos = fTest.findCell(this->cursor_X, this->cursor_Y);
 					if (pos.i > -1 && pos.j > -1){
 
 						this->mActionsTest.RIGHT_CLICK(this->fTest.getVector(), pos.i, pos.j);
@@ -207,7 +207,7 @@ public:
 
 						if (!menu.getMenuFlag() && !this->gResult)
 						{
-							position pos = this->fTest.findCell({ (short)this->cursor_X, (short)this->cursor_Y });
+							position pos = this->fTest.findCell(this->cursor_X, this->cursor_Y);
 							if (pos.i > -1 && pos.j > -1)
 							{
 								if (!this->mActionsTest.LEFT_CLICK(fTest.getVector(), pos.i, pos.j))

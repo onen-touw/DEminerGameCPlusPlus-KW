@@ -16,6 +16,132 @@ public:
 		this->BLIT_AFTER_SEARCH(V);
 	}
 
+	std::vector<cell_values>arCell(int i,int j, std::vector<std::vector<cell_values>>& V) {
+		std::vector<cell_values>tempDc;
+		if (i>0 && j >0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i - 1][j - 1].open)
+			{
+				V[i - 1][j - 1].open = true;
+				tempDc.push_back(V[i - 1][j - 1]);
+			}
+		}
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i - 1][j + 1].open)
+			{
+				V[i - 1][j + 1].open = true;
+				tempDc.push_back(V[i - 1][j + 1]);
+			}
+		}
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i - 1][j].open)
+			{
+				V[i - 1][j].open = true;
+				tempDc.push_back(V[i - 1][j]);
+			}
+		}
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i][j + 1].open)
+			{
+				V[i][j + 1].open = true;
+				tempDc.push_back(V[i][j + 1]);
+			}
+		}
+
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i + 1][j + 1].open)
+			{
+				V[i + 1][j + 1].open = true;
+				tempDc.push_back(V[i + 1][j + 1]);
+			}
+		}
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i + 1][j - 1].open)
+			{
+				V[i + 1][j - 1].open = true;
+				tempDc.push_back(V[i + 1][j - 1]);
+			}
+		}
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i + 1][j].open)
+			{
+				V[i + 1][j].open = true;
+				tempDc.push_back(V[i + 1][j]);
+			}
+		}
+		if (i > 0 && j > 0 && i < V.size() && j < V[0].size())
+		{
+			if (!V[i][j - 1].open)
+			{
+				V[i][j - 1].open = true;
+				tempDc.push_back(V[i][j - 1]);
+			}
+		}
+
+		return tempDc;
+	}
+
+
+	void SEARCH_AROUND2(int i, int j, std::vector<std::vector<cell_values>>& V) {
+
+		if (V[i][j].open )
+		{
+			return;
+		}
+		else if (V[i][j].bmb_near)
+		{
+			V[i][j].open = true;
+			return;
+		}
+		else
+		{
+			std::vector<cell_values>tempDc;
+			std::vector<cell_values>tempDc2;
+			std::vector<cell_values> Dc;
+		
+			tempDc = arCell(i, j, V);
+
+		
+		
+			while (!tempDc.empty())
+			{
+				for (int i = 0; i < tempDc.size(); i++)
+				{
+					Dc.push_back(tempDc[i]);
+				}
+				tempDc.clear();
+
+				for (int i = 0; i < Dc.size(); i++)
+				{
+					if (!Dc[i].bmb_near)
+					{
+						tempDc2 = arCell(Dc[i].i, Dc[i].j, V);
+
+					}
+
+					if (tempDc2.size())
+					{
+						for (int k = 0; k < tempDc2.size(); k++)
+						{
+							tempDc.push_back(tempDc2[k]);
+						}
+
+						tempDc2.clear();
+					}
+				}
+			}
+			Dc.clear();
+		}
+	return;
+
+	}
+
 	void SEARCH_AROUND(short i, short j, std::vector<std::vector<cell_values>>& V) {
 		//cout << "==========SEARCH_AROUND_WAS_STARTED==========" << endl;
 
@@ -38,12 +164,37 @@ public:
 		if (!V[i][j].open && !V[i][j].bomb) //если это не бомба и €чейка закрыта открываем ее и идем в следующие
 		{
 			V[i][j].open = true;
+
 			//рекурси€
 			SEARCH_AROUND(i - 1, j, V);
 			SEARCH_AROUND(i + 1, j, V);
 			SEARCH_AROUND(i, j - 1, V);
 			SEARCH_AROUND(i, j + 1, V);
 
+			if (!V[i][j].bmb_near)
+			{
+				if (!V[i + 1][j + 1].open )
+				{
+					SEARCH_AROUND(i + 1, j+1, V);
+					V[i + 1] [j + 1] .open = true;
+				}
+				if (!V[i - 1][j + 1].open )
+				{
+					SEARCH_AROUND(i - 1, j + 1, V);
+					V[i - 1][j + 1].open = true;
+				}
+				if (!V[i - 1][j - 1].open )
+				{
+					SEARCH_AROUND(i - 1, j - 1, V);
+					V[i - 1][j - 1].open = true;
+				}
+				if (!V[i + 1][j - 1].open )
+				{
+					SEARCH_AROUND(i + 1, j - 1, V);
+					V[i + 1][j - 1].open = true;
+				}
+
+			}
 		
 		}
 		else
@@ -122,6 +273,7 @@ public:
 	//	//cout << "==============DEBUG_GAME_MAIN_CLASS====================" << endl;
 	//}
 
+	///notUsed
 	//возвращает кол-во флагов вокруг €чейки i j если она не бомба
 	bool ROUND_OPEN_ROUND_SEARCH_FLAG(int i, int j, std::vector<std::vector<cell_values>>&V) {
 		int count = 0;
@@ -162,8 +314,8 @@ public:
 						{
 							if (V[mas[k].i][mas[k].j].bmb_near == 0) {
 
-								this->SEARCH_AROUND(mas[k].i, mas[k].j, V);
-								this->BLIT_AFTER_SEARCH(V);
+								this->SEARCH_AROUND2(mas[k].i, mas[k].j, V);
+								//this->BLIT_AFTER_SEARCH(V);
 								V[mas[k].i][mas[k].j].open = true;
 							}
 							else
@@ -241,17 +393,17 @@ public:
 		{
 			if (V[i][j].open)
 			{
-				/*if (V[i][j].bmb_near>0)
+				if (V[i][j].bmb_near>0)
 				{
 					if (!ROUND_OPEN_ROUND_SEARCH_FLAG(i, j, V))
 					{
-						V[i][j].open = true;
+						//V[i][j].open = true;
 						std::cout << "you lose " << std::endl;
 						return false;
 					}
 					else return true;
 				}
-				else return true;*/
+				else return true;
 			}
 			else
 			{
@@ -264,9 +416,9 @@ public:
 					}
 					else 
 					{
-
-						 this->SEARCH_AROUND(i, j, V);
-						this->BLIT_AFTER_SEARCH(V);
+						 //this->SEARCH_AROUND(i, j, V);
+						this->SEARCH_AROUND2(i, j, V);
+						//this->BLIT_AFTER_SEARCH(V);
 						return true;
 					}
 				}
